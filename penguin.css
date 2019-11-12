@@ -1,10 +1,25 @@
 
-
+body
+{
+    background-color: #f5f6fa;
+}
 h1
 {
+    text-align: center;
     border-style: solid;
-    border-width: 5px;
-    border-color: skyblue;
-    border-radius: 10px;
-    
+    border-width: 3px;
+    border-color: black;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #dcdde1;
+}
+
+h2
+{
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #dcdde1;
 }

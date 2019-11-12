@@ -5,72 +5,74 @@ penpromise.then(function(data)
 }),
 function(error)
 {
-    console.log("negative ghost rider")
+    console.log("FAIL")
 }
-var screen={width:800,height:800}
-var drawpoints=function(AllQuizes, xScale, yScale)
+var screen={width:1000,height:1000}
+var drawpoints=function(quizdata, xScale, yScale)
 {
     d3.selectAll("svg *")
-    .remove()
+      .remove()
     d3.select("svg")
-    .attr("height",screen.height)
-    .attr("width",screen.width)
+      .attr("height",screen.height)
+      .attr("width",screen.width)
     d3.select('svg')
-    .selectAll("circle")
-    .data(AllQuizes)
-    .enter()
-    .append("circle")
-    .attr("cx",function(d){return xScale(d.x)})
-    .attr("cy",function(d){return yScale(d.y)})
-    .attr("r",12)
-    .attr("fill", function(d){ return "blue"})    
+      .selectAll("circle")
+      .data(quizdata)
+      .enter()
+      .append("circle")
+      .attr("cx",function(d){return xScale(d.x)})
+      .attr("cy",function(d){return yScale(d.y)})
+      .attr("fill", function(d){ return "black"})
+      .attr("r",16)
+     
 }
 var quizscale = function(data)
 {
 var xScale=
 d3.scaleLinear()
- xScale.domain(
- [
+xScale.domain
+    (
+        [
      d3.min(data,function(d){return d.x}),
      d3.max(data,function(d){return d.x})
- ]
- )
+        ]
+    )
 xScale.range([100,screen.width-50])
  return xScale
 }
-
-var THEYScale = function(data)
+var quizscaleY = function(data)
 {
 var yScale=
 d3.scaleLinear()
- yScale.domain(
- [
-    d3.min(data,function(d){return d.y}),
-     d3.max(data,function(d){return d.y})
- ]
- )
+yScale.domain
+    (
+        [
+            d3.min(data,function(d){return d.y}),
+            d3.max(data,function(d){return d.y})
+        ]
+    )
 yScale.range([100,screen.height-400])
 return yScale  
 }
 var everyday= function(data)
-{       var dataDay= 
+{       var DataEachDay= 
             d3.range(38)
             d3.select(".spanpen")
               .selectAll("button")
-              .data(dataDay)
+              .data(DataEachDay)
               .enter()
               .append("button")
               .text(function(d) {return d})
               .on("click", function(d)
     {   
-    var firstPerson= function(data,day)
+    var person= function(data,day)
         {
             var obj= {}
             obj.x= day
             obj.y= data.quizes[d].grade
             return obj         
         }
- var AllQuizes = data.map(firstPerson)
-        drawpoints(AllQuizes, quizscale(AllQuizes), THEYScale(AllQuizes))
+ var quizdata = data.map(person)
+        drawpoints(quizdata, quizscale(quizdata), quizscaleY(quizdata))
         })
 }
